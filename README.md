@@ -16,7 +16,20 @@ To generate Green Matrices, from the IDL command prompt (SSW IDL), run the follo
 
     IDL> make_all_green_1kev
 
-The routine will generate matrices in the local folder.
+The routine will generate IDL save files in the local folder.
+> ls                                             
+green_compton_mu005.dat  green_compton_mu055.dat 
+green_compton_mu010.dat  green_compton_mu060.dat 
+green_compton_mu015.dat  green_compton_mu065.dat 
+green_compton_mu020.dat  green_compton_mu070.dat 
+green_compton_mu025.dat  green_compton_mu075.dat 
+green_compton_mu030.dat  green_compton_mu080.dat 
+green_compton_mu035.dat  green_compton_mu085.dat 
+green_compton_mu040.dat  green_compton_mu090.dat 
+green_compton_mu045.dat  green_compton_mu095.dat 
+green_compton_mu050.dat                          
+
+ 
 
 
 

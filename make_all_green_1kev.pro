@@ -49,34 +49,22 @@ pro make_all_green_1kev
 
 RESOLVE_ROUTINE,'absorption', /COMPILE_FULL_FILE
 RESOLVE_ROUTINE,'green', /COMPILE_FULL_FILE
+RESOLVE_ROUTINE,'green1', /COMPILE_FULL_FILE
 
 mc2=511.
-N=597
+N=597 ; number of energies
 Njana=N
 
-;M=303
-
 mu_arr=fltarr(18)/20.+0.5
-
-;mu0=cos(45.*!PI/180.)
-;print, '!4m!3 =',mu0
-
+; 18 heliocentric angles 
 
 EBinNumber=N
 e2N=fltarr(2,EbinNumber)
-base=(1000.-2.-float(EBinNumber)*.3)^(1./EBinNumber)
-Ebin=2.+findgen(EBinNumber+1)*.3+base^findgen(EBinNumber+1)
-;e2N(0,*)=EBin(0:N_elements(EBin)-2)
-;e2N(1,*)=EBin(1:N_elements(EBin)-1)
-
 e2N(0,*)=findgen(N)+3.
 e2N(1,*)=findgen(N)+4.
 
-
-
 for s=0,18 do begin
 
-;s=18
 mu0=0.05+s*0.05
 
 ;mu0=0.77
@@ -84,18 +72,13 @@ mu0=0.05+s*0.05
 print,'current mu =',mu0
 
 save_file='green_compton_mu'+string(format='(I3.3)',5*FLOOR(mu0*20.),/print)+'.dat'
-
-
-
 e2jana=e2N
 
 de=e2jana(1,*)-e2jana(0,*)
 de=transpose(de)
-
 e=(e2N(0,*)+e2N(1,*))/2.
+; mid energy per bin
 
-;E =transpose(900./float(findgen(N)+1.) )
-;E=findgen(N)*4.+1.
 x =E/mc2
 x2N=e2N/mc2
 x0=x
@@ -103,12 +86,9 @@ x0=x
 Fref=fltarr(N)
 A=fltarr(N,N)
 
-;stop
-
 y =1./x
 y0=1./x0
 yy=511./e2N
-;dy=transpose(yy(0,*)-yy(1,*))
 GreenF=fltarr(100)
 
 y0_max=511./4.
@@ -250,10 +230,11 @@ plot_oo,e,f0,xrange=[3,500],xstyle=1,ytitle='Photon Flux',xtitle='Energy, keV'
 oplot,e,a0,line=2
 oplot,e,f0+a0,line=1
 
+mydevice = !D.NAME
 Set_plot, 'PS'
 Device,filename='albedo_mu077_pow2_reference.ps', xsize=12,ysize=12,xoffset=2,yoffset=2,ENCAPSULATED=0
-
 !P.Multi=[0,1,2]
+; generates reference graph to compare with published results
 
 plot_oo,e,F17,xrange=[3,500],yrange=[1e-5,1.],xstyle=1,ytitle='Photon Flux',xtitle='Energy, keV'
 oplot,e,a17,line=1
@@ -262,10 +243,8 @@ oplot,e,a17+F17,line=2
 plot_oo, e, a17/f17, xrange=[3,500],yrange=[1e-2,1],xstyle=1,ytitle='Reflectivity',xtitle='Energy, keV'
 
 !P.Multi=0
-
 DEVICE, /CLOSE
-SET_PLOT, 'win'
-
+SET_PLOT, mydevice
 
 print,'All files calculated ...................... OK'
 

@@ -12,4 +12,11 @@ X-ray albedo included in GX simulator:
 https://github.com/Gelu-Nita/GX_SIMULATOR/blob/d772a411705ceed9db2a5b6eadfa14cd5dda190f/userslib/xray/xray_tt_albedo.pro
 
 
+To generate Green Matrices, from the IDL command prompt (SSW IDL), run the following:
+
+    IDL> make_all_green_1kev
+
+The routine will generate matrices in the local folder.
+
+
 

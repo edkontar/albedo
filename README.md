@@ -1,4 +1,4 @@
-# albedo
+# Hard X-ray solar albedo
 
 X-ray albedo green matrix correction for solar hard X-ray analysis 
 
